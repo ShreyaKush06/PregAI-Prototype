@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='light'] {
+    --c-base: 13 18 24;
+    --c-base-raised: 10 15 20;
+    --c-surface: 17 25 32;
+    --c-surface-elevated: 22 31 40;
+    --c-surface-hover: 28 39 49;
+    --c-border: 37 49 59;
+    --c-border-subtle: 29 39 48;
+    --c-ink: 240 244 248;
+    --c-ink-muted: 151 164 177;
+    --c-ink-faint: 112 127 140;
+    --c-brand: 0 226 231;
+    --c-brand-dim: 0 173 185;
+    --c-brand-glow: 64 238 240;
+    --c-secondary: 0 190 151;
+    --c-secondary-dim: 0 143 112;
+    --c-accent-purple: 168 104 255;
+    --c-accent-purple-dim: 128 73 206;
+    --c-accent-gold: 255 174 0;
+    --c-accent-gold-dim: 190 124 0;
+    --c-status-normal: 0 176 83;
+    --c-status-warning: 255 174 0;
+    --c-status-critical: 255 87 87;
+    --c-status-disconnected: 100 116 139;
+    --c-status-demo: 168 104 255;
+    --bg-glow-1: 0;
+    --bg-glow-2: 0;
+  }
+  html { @apply bg-base text-ink; }
+  body {
+    @apply font-sans antialiased;
+    background: rgb(var(--c-base));
+    min-height: 100vh;
+  }
+  h1,h2,h3,h4 { @apply font-display; }
+  ::selection { background: rgb(var(--c-brand) / .25); }
+  *:focus-visible { outline: 2px solid rgb(var(--c-brand)); outline-offset: 2px; }
+  ::-webkit-scrollbar { width: 9px; height: 9px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--c-base-raised)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--c-border)); border-radius: 8px; }
+}
+@layer components {
+  .card {
+    @apply relative border rounded-xl;
+    background: linear-gradient(145deg, rgb(var(--c-surface)), rgb(17 28 37));
+    border-color: rgb(var(--c-border-subtle));
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+@layer utilities {
+  button:not(:disabled), a {
+    transition-property: color, background-color, border-color, transform, box-shadow, opacity;
+    transition-duration: 160ms;
+  }
+  button:not(:disabled):active { transform: scale(.98); }
+  .stagger-in { animation: fadeInUp .45s ease-out both; }
+}
+
+/* Kinova-inspired clinical monitoring console */
+.pregai-shell { background:#0d1218; }
+.pregai-sidebar { width: 286px; background:#090e13; border-color:#202a33; }
+.pregai-brand { min-height:92px; border-bottom:1px solid #202a33; padding:18px 20px; }
+.pregai-brand-mark { width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  color:#00e6e9;background:linear-gradient(145deg,#071b2b,#08111b);border:1px solid #102b3a; }
+.pregai-brand-name { font-size:29px;letter-spacing:-1.1px;font-weight:750;color:#f3f7fa; }
+.pregai-nav-label { font-size:12px;letter-spacing:.06em;color:#8194a5;padding:22px 12px 10px; }
+.pregai-nav a { min-height:43px;border-radius:9px;padding:10px 12px;gap:13px;font-size:14px;font-weight:550; }
+.pregai-nav a[aria-current="page"], .pregai-nav a.active { background:#102b35;color:#f4fbff; }
+.pregai-nav a[aria-current="page"] svg, .pregai-nav a.active svg { color:#00e6e9; }
+.pregai-topbar { height:72px;background:#10171d;border-color:#27313a;padding:0 28px; }
+.pregai-main { padding:28px !important; background:#0d141b; }
+.pregai-page-title { font-size:30px !important;letter-spacing:-.7px;font-weight:700 !important; }
+.pregai-page-subtitle { font-size:16px !important;color:#91a2b3 !important; }
+.card { border-radius:15px !important; padding:22px !important; }
+.card h3 { font-size:17px !important; }
+.pregai-stat-card:nth-child(4n+1) { background:linear-gradient(140deg,#17192b,#171d2b); }
+.pregai-stat-card:nth-child(4n+2) { background:linear-gradient(140deg,#102a29,#102120); }
+.pregai-stat-card:nth-child(4n+3) { background:linear-gradient(140deg,#242116,#1b1d1c); }
+.pregai-stat-card:nth-child(4n+4) { background:linear-gradient(140deg,#102633,#111e2a); }
+@media(max-width:900px) {
+ .pregai-sidebar { width:230px; }
+ .pregai-main { padding:18px !important; }
+ .pregai-brand-name { font-size:24px; }
+}
+@media(max-width:640px) {
+ .pregai-sidebar { width:72px; }
+ .pregai-brand { padding:14px 10px;justify-content:center; }
+ .pregai-brand-name,.pregai-brand small,.pregai-nav-label,.pregai-nav a span:not(.nav-icon),.pregai-user-meta,.pregai-theme-label { display:none !important; }
+ .pregai-nav a { justify-content:center;padding:12px 8px; }
+ .pregai-main { padding:14px !important; }
+ .pregai-topbar { padding:0 14px; }
+}
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important;} }
+
+.pregai-topbar { padding-left:28px; padding-right:28px; }
+.pregai-topbar > div:first-child { flex:1; }
+@media(max-width:640px){.pregai-topbar{padding-left:14px;padding-right:14px}.pregai-topbar > div:first-child{flex:0 1 auto}}
+
+/* PregAI clinical visualization suite */
+.fetus-stage{position:relative;min-height:340px;overflow:hidden;border:1px solid #203440;border-radius:14px;background:radial-gradient(ellipse at 50% 48%,#153642 0%,#101a25 58%,#0c141c 100%);display:flex;align-items:center;justify-content:center}
+.fetus-art{width:min(100%,440px);height:310px;position:relative;z-index:2;filter:drop-shadow(0 14px 34px rgba(0,0,0,.28))}
+.fetus-breathe{transform-origin:210px 190px;animation:fetusBreath 4.2s ease-in-out infinite}
+.heartbeat-pulse{transform-origin:210px 180px;animation:heartbeatRing 2.1s ease-out infinite}
+.fetus-orbit{position:absolute;border:1px solid rgba(0,230,233,.13);border-radius:50%;width:280px;height:280px}
+.orbit-one{animation:orbitFloat 18s linear infinite}.orbit-two{width:330px;height:330px;border-color:rgba(168,121,255,.10);animation:orbitFloat 24s linear infinite reverse}
+.fetus-caption{position:absolute;left:18px;top:16px;font:10px/1.4 ui-sans-serif,sans-serif;letter-spacing:.13em;color:#86a6b8;z-index:4;display:flex;align-items:center;gap:8px}
+.live-dot{width:7px;height:7px;background:#00c99a;border-radius:50%;box-shadow:0 0 12px #00c99a}
+.fetus-footer{position:absolute;bottom:12px;left:18px;right:18px;display:flex;justify-content:space-between;color:#718a9e;font-size:10px;z-index:3}
+.kinova-metric-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kinova-mini{border:1px solid #22313d;border-radius:12px;padding:15px 17px;background:linear-gradient(145deg,#121e28,#101720);display:flex;flex-direction:column;gap:8px}
+.kinova-mini>span{font-size:12px;color:#91a4b5}.kinova-mini strong{font-size:24px;color:#eef7fb;font-weight:700}.kinova-mini small{font-size:11px;color:#8499aa;font-weight:500;margin-left:5px}.kinova-mini i{font-style:normal;font-size:9px;letter-spacing:.1em;color:#00c99a}
+.kinova-mini.teal{border-top:2px solid #00e6e9}.kinova-mini.purple{border-top:2px solid #a879ff}.kinova-mini.green{border-top:2px solid #00c99a}.kinova-mini.gold{border-top:2px solid #ffb547}
+@keyframes fetusBreath{0%,100%{transform:translateY(1px) scale(1)}50%{transform:translateY(-3px) scale(1.018)}}
+@keyframes heartbeatRing{0%{transform:scale(.88);opacity:.5}75%,100%{transform:scale(1.16);opacity:0}}
+@keyframes orbitFloat{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@media(max-width:768px){.kinova-metric-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.fetus-stage{min-height:300px}.fetus-art{height:280px}}
+@media(prefers-reduced-motion:reduce){.fetus-breathe,.heartbeat-pulse,.fetus-orbit{animation:none}}
+
+/* Maternal anatomy visualization */
+.maternal-stage{background:radial-gradient(ellipse at 50% 48%,#183d4b 0%,#101a25 60%,#0c141c 100%)}
+.maternal-art{height:330px;max-width:500px}
+.maternal-breathe{transform-origin:210px 190px;animation:maternalBreath 5s ease-in-out infinite}
+.electrode-points circle{filter:drop-shadow(0 0 5px rgba(88,160,255,.45))}
+.maternal-labels{position:absolute;right:16px;top:48px;display:flex;flex-direction:column;gap:8px;font-size:9px;letter-spacing:.08em;color:#7e9cb1;z-index:4}
+.maternal-labels span{background:#0b1721cc;border:1px solid #263a4c;border-radius:4px;padding:3px 5px}
+@keyframes maternalBreath{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.008)}}
+@media(max-width:640px){.maternal-art{height:260px}.maternal-labels{right:6px;top:45px}}
+
+/* Refined maternal anatomy guide */
+.maternal-guide{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;border:1px solid #203440;border-radius:14px;background:radial-gradient(ellipse at 50% 48%,#142b36 0%,#101a24 55%,#0b1219 100%);padding:16px 16px 12px}
+.guide-caption{position:absolute;left:18px;top:15px;font-size:10px;letter-spacing:.14em;color:#8da7b8;display:flex;align-items:center;gap:8px;z-index:2}
+.guide-live-dot{width:6px;height:6px;border-radius:50%;background:#35d6b0;box-shadow:0 0 10px #35d6b055}
+.guide-figure{height:clamp(260px,38vh,390px);max-width:100%;width:auto;overflow:visible}
+.guide-marker{cursor:help;outline:none}
+.guide-marker:focus circle:first-child{stroke:#fff;stroke-width:1.5}
+.guide-key{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:2px;color:#9aafbd;font:10px/1.4 ui-sans-serif,system-ui}
+.guide-key span{display:flex;align-items:center;gap:5px}
+.guide-key i{width:6px;height:6px;border-radius:50%;display:inline-block}
+.guide-disclaimer{font-size:9px;color:#71899a;margin-top:8px;text-align:center}
+@media(max-width:640px){.maternal-guide{padding:28px 6px 10px}.guide-figure{height:270px}.guide-key{gap:8px}}
